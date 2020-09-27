@@ -6,7 +6,7 @@ n = 3;
 
 lambda  = zeros(11,1);
 for i = 1:11
-    lambda(i) = (i-1)*10^4;
+    lambda(i) = (i-1)*10^-4;
 end
 
 w_optimal = zeros(11,3);
@@ -23,6 +23,8 @@ end
 expected_return = w_optimal*mu;
 volatility = zeros(11,1);
 for i = 1:11
-    volatility(i)=w_optimal(i,:)*sigma*w_optimal(i,:)';
+    volatility(i)=sqrt(w_optimal(i,:)*sigma*w_optimal(i,:)');
 end
-plot(expected_return,sqrt(volatility))
+plot(expected_return,(volatility))
+xlabel('Portfolio Expected Return', 'fontsize',14)
+ylabel('Portfolio Volatility','fontsize', 14)

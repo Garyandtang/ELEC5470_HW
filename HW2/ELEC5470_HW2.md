@@ -29,6 +29,8 @@ w = x/(ones(1,n)*x)
 
 with answer: $x^* =[0.4085, 0.1671, 0.9226]^T$, $w = [0.2726, 0.1115, 0.6158]^T$
 
+
+
 ### Problem2
 
 $$\begin{array}{ll}
@@ -52,7 +54,7 @@ n = 3;
 
 lambda  = zeros(11,1);
 for i = 1:11
-    lambda(i) = (i-1)*10^4;
+    lambda(i) = (i-1)*10^-4;
 end
 
 w_optimal = zeros(11,3);
@@ -71,10 +73,14 @@ volatility = zeros(11,1);
 for i = 1:11
     volatility(i)=sqrt(w_optimal(i,:)*sigma*w_optimal(i,:)');
 end
-plot(expected_return,volatility)
+plot(expected_return,(volatility))
+xlabel('Portfolio Expected Return', 16)
+ylabel('Portfolio Volatility','Interpreter','latex','fontsize', 16)
 ```
 
-**Figure**
+**Figure****
+
+![problem2](/home/jtangas/Documents/jiawei/04_github/ELEC5470_HW/HW2/script/problem2.png)
 
 ### Problem3
 
@@ -98,86 +104,62 @@ xlabel("index i",'fontsize', 16)
 ylabel('Optimal solution element ${\beta_{i}}$','Interpreter','latex','fontsize', 16)
 ```
 
-For $n=73, m=44$, the optimal solution $\beta^*$ is
+For $n=90, m=39$, the optimal value  is 3.3471e+04
+
+**Figure** of optimal solution $\beta^*$
+
+![problem3](/home/jtangas/Documents/jiawei/04_github/ELEC5470_HW/HW2/script/problem3.png)
+
+### Problem 4
+
+**Code**
 
 ```matlab
-beta =
+clear;clc;
+n = randi([1,100],1);
+m = randi([1,100],1);
+% n = 10;
+% p = 8;
+X = zeros(n,p);
+cMatrix = eye(n);
+a = 2;
+for i = 1:p
+    noiseVec = randn(n,1);
+    noiseVec = cMatrix*noiseVec;
+    X(:,i) = noiseVec;
+end
+num = 100;
+S = 1/n * (X')*X;
+theta_1_norm = zeros(num,1);
+for i = 1 : num
+    cvx_begin
+        variable theta(p,p) semidefinite
+        minimize(trace(S*theta) - log_det(theta*S) + (i-1)*ones(1,p)*abs(theta)*ones(p,1))
+    cvx_end
+    theta_1_norm(i) = ones(1,p)*abs(theta)*ones(p,1);
+end
 
-    0.0003
-    0.0018
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0065
-    0.0130
-    0.0130
-    0.0130
-    0.0130
+a = 0 : num-1;
+plot(a,theta_1_norm);
+xlabel('${\alpha}$','Interpreter','latex','fontsize', 16)
+ylabel('Quantity $||\Theta^*(\alpha)||$','Interpreter','latex','fontsize', 16)
+
 ```
 
-the optimal value is +42.0211
+**Figure on optimal solution**
 
-$||\Theta^*(\alpha)||$
+$\alpha=0$
+
+$\alpha=2$
+
+$\alpha=4$
+
+$\alpha=6$
+
+$\alpha=8$
+
+
+
+**Figure** on quanlity and $\alpha$ 
+
+![problem4_2](/home/jtangas/Documents/jiawei/04_github/ELEC5470_HW/HW2/script/problem4_2.png)
