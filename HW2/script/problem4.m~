@@ -1,0 +1,18 @@
+clear;clc;
+n = randi([1,10000],1);
+p = randi([1,n-1],1);
+X = zeros(n,p);
+for i = 1:n
+    noiseVec = randn(p,1);
+    cMatrix = eye(p);
+    noiseVec = cMatrix*noiseVec;
+    X(i,:) = 
+end
+
+% m=0;
+% 
+% v=1;
+% 
+% s=m+sqrt(v)*randn(1,10000);
+% 
+% plot(s)
