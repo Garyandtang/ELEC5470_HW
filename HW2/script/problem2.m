@@ -23,6 +23,6 @@ end
 expected_return = w_optimal*mu;
 volatility = zeros(11,1);
 for i = 1:11
-    volatility(i)=w_optimal(i,:)*sigma*w_optimal(i,:)';
+    volatility(i)=sqrt(w_optimal(i,:)*sigma*w_optimal(i,:)');
 end
 plot(expected_return,sqrt(volatility))
