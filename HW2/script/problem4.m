@@ -1,6 +1,6 @@
 clear;clc;
 n = 10
-p = 2
+p = 8
 X = zeros(n,p);
 cMatrix = eye(n);
 a = 2;
@@ -22,4 +22,6 @@ end
 
 a = 0 : num-1;
 plot(a,theta_1_norm);
+xlabel('${\alpha}$','Interpreter','latex','fontsize', 16)
+ylabel('Quantity $||\Theta^*(\alpha)||$','Interpreter','latex','fontsize', 16)
 
