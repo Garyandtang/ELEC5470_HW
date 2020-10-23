@@ -7,7 +7,7 @@ M = Y*Y';
 
 % get maximum eigenvalue of M
 [U, Sigma, V] = svd(M);
-max_lambda = 100%max(max(Sigma));
+max_lambda = max(max(Sigma));
 
 % MM algorithm
 k = 1;
@@ -27,6 +27,6 @@ while 1
     end
 end
 
-plot([1:k],obj_value,'LineWidth',5);
-xlabel({'The numbber of iterations'},'Interpreter','latex','fontsize', 40);
-ylabel({'Objective value'},'Interpreter','latex','fontsize', 40);
+plot([1:k],obj_value);
+xlabel({'The numbber of iterations'},'Interpreter','latex','fontsize', 16);
+ylabel({'Objective value'},'Interpreter','latex','fontsize', 16);

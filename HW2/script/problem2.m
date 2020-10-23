@@ -25,4 +25,10 @@ volatility = zeros(11,1);
 for i = 1:11
     volatility(i)=sqrt(w_optimal(i,:)*sigma*w_optimal(i,:)');
 end
+<<<<<<< HEAD
 plot(expected_return,volatility)
+=======
+plot(expected_return,(volatility))
+xlabel('Portfolio Expected Return', 'fontsize',14)
+ylabel('Portfolio Volatility','fontsize', 14)
+>>>>>>> a1ce2feacf7e10f011fb3fddcab1d9e573f742e8

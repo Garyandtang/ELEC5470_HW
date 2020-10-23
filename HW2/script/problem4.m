@@ -1,23 +1,28 @@
 clear;clc;
-n = 10
-p = 8
+% n = randi([1,100],1);
+% p = randi([1,100],1);
+n = 10;
+p = 8;
 X = zeros(n,p);
 cMatrix = eye(n);
-a = 2;
+
 for i = 1:p
     noiseVec = randn(n,1);
     noiseVec = cMatrix*noiseVec;
     X(:,i) = noiseVec;
 end
-num = 100;
 S = 1/n * (X')*X;
+
+num = 100;
 theta_1_norm = zeros(num,1);
+theta_list = zeros(p,p, num);
 for i = 1 : num
     cvx_begin
         variable theta(p,p) semidefinite
-        minimize(trace(S*theta) - log_det(theta*S) + (i-1)*ones(1,p)*theta*ones(p,1))
+        minimize(trace(S*theta) - log_det(theta) + (i-1)*ones(1,p)*abs(theta)*ones(p,1))
     cvx_end
-    theta_1_norm(i) = ones(1,p)*theta*ones(p,1);
+    theta_1_norm(i) = ones(1,p)*abs(theta)*ones(p,1);
+    theta_list(:,:,i) = theta;
 end
 
 a = 0 : num-1;

@@ -1,0 +1,21 @@
+clear;clc;
+cvx_begin
+    variable x(3)
+    minimize(norm(x,1))
+    subject to
+        x <= 100
+        x >= -11
+        
+        
+cvx_end
+
+% for i = 1:11
+%     cvx_begin
+%         variable w(n)
+%         minimize(w'*sigma*w - lambda(i)*mu'*w)
+%         subject to
+%             w >= 0
+%             w'*ones(n,1) == 1
+%     cvx_end 
+%     w_optimal(i,:) = w';
+% end
